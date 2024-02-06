@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:islamii_app/layout/layout_view.dart';
+import 'package:islamii_app/modules/quraan/page/quran_details_view.dart';
 import 'package:islamii_app/modules/splash/page/splash_view.dart';
 
 import 'config/aplication_them_manager.dart';
@@ -20,7 +21,8 @@ class Myapplication extends StatelessWidget {
       initialRoute: SplashScreen.route_name,
       routes: {
         SplashScreen.route_name: (context) => SplashScreen(),
-        LayoutScreen.route_name: (context) => LayoutScreen()
+        LayoutScreen.route_name: (context) => LayoutScreen(),
+        QuranDetailsView.route_name: (context) => QuranDetailsView(),
       },
     );
   }
