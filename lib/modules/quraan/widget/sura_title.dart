@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:islamii_app/config/settings_provider.dart';
+import 'package:provider/provider.dart';
 
 class SuraTitle extends StatelessWidget {
   final String suraName;
@@ -10,31 +12,29 @@ class SuraTitle extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     var theme = Theme.of(context);
+    var vm = Provider.of<SettingProvider>(context);
     return Row(
       children: [
         Expanded(
           child: Text(
             suraNumber,
-            style: TextStyle(
-              fontSize: 20,
-              fontWeight: FontWeight.bold,
-              fontFamily: "El Mesiri",
-            ),
+            style: vm.current_theme == ThemeMode.light
+                ? theme.textTheme.bodyLarge
+                : theme.textTheme.bodyLarge,
             textAlign: TextAlign.center,
           ),
         ),
-        Container(
+        const SizedBox(
           width: 2,
           height: 36,
-          color: theme.primaryColor,
+          child: VerticalDivider(),
         ),
         Expanded(
           child: Text(
             suraName,
-            style: TextStyle(
-                fontSize: 20,
-                fontWeight: FontWeight.bold,
-                fontFamily: "El Mesiri"),
+            style: vm.current_theme == ThemeMode.light
+                ? theme.textTheme.bodyLarge
+                : theme.textTheme.bodyLarge,
             textAlign: TextAlign.center,
           ),
         ),
