@@ -1,12 +1,16 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
+import 'package:islamii_app/config/settings_provider.dart';
 import 'package:islamii_app/modules/hadeth/page/hadeth_view.dart';
 import 'package:islamii_app/modules/quraan/page/quran_view.dart';
 import 'package:islamii_app/modules/rdaio/page/radio_view.dart';
 import 'package:islamii_app/modules/sepha/page/sepha_view.dart';
 import 'package:islamii_app/modules/settings/page/setting_view.dart';
+import 'package:islamii_app/translations/local_keys.g.dart';
+import 'package:provider/provider.dart';
 
 class LayoutScreen extends StatefulWidget {
-  LayoutScreen({super.key});
+  const LayoutScreen({super.key});
 
   static const route_name = 'Layout Screen';
 
@@ -15,25 +19,25 @@ class LayoutScreen extends StatefulWidget {
 }
 
 class _LayoutScreenState extends State<LayoutScreen> {
-  int currentIndex = 4;
+  int currentIndex = 0;
   List<Widget> Screens = [
-    SettingView(),
-    RadioView(),
-    SebhaView(),
-    HadethView(),
     QuranView(),
+    const HadethView(),
+    const SebhaView(),
+    const RadioView(),
+    const SettingView(),
   ];
 
   @override
   Widget build(BuildContext context) {
+    var vm = Provider.of<SettingProvider>(context);
     return Container(
       decoration: BoxDecoration(
           image: DecorationImage(
-              image: AssetImage('assets/images/main.bg.png'),
-              fit: BoxFit.fill)),
+              image: AssetImage(vm.getBackground()), fit: BoxFit.fill)),
       child: Scaffold(
         appBar: AppBar(
-          title: Text('إسلامي'),
+          title: Text(LocaleKeys.islami.tr()),
         ),
         body: Screens[currentIndex],
         bottomNavigationBar: BottomNavigationBar(
@@ -43,21 +47,22 @@ class _LayoutScreenState extends State<LayoutScreen> {
               currentIndex = value;
             });
           },
-          items: const [
+          items: [
             BottomNavigationBarItem(
-                icon: Icon(Icons.settings), label: 'الأعدادات'),
+                icon: const ImageIcon(AssetImage('assets/images/quraan.png')),
+                label: LocaleKeys.quran.tr()),
             BottomNavigationBarItem(
-                icon: ImageIcon(AssetImage('assets/images/radio.png')),
-                label: 'الراديو'),
+                icon: const ImageIcon(AssetImage('assets/images/hadeth.png')),
+                label: LocaleKeys.hadeth.tr()),
             BottomNavigationBarItem(
-                icon: ImageIcon(AssetImage('assets/images/sebha.png')),
-                label: 'التسبيح'),
+                icon: const ImageIcon(AssetImage('assets/images/sebha.png')),
+                label: LocaleKeys.tasbeh.tr()),
             BottomNavigationBarItem(
-                icon: ImageIcon(AssetImage('assets/images/hadeth.png')),
-                label: 'الحديث'),
+                icon: const ImageIcon(AssetImage('assets/images/radio.png')),
+                label: LocaleKeys.radio.tr()),
             BottomNavigationBarItem(
-                icon: ImageIcon(AssetImage('assets/images/quraan.png')),
-                label: 'القرأن'),
+                icon: const Icon(Icons.settings),
+                label: LocaleKeys.settings.tr()),
           ],
         ),
       ),
