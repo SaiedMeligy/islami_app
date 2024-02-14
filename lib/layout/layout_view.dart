@@ -37,7 +37,10 @@ class _LayoutScreenState extends State<LayoutScreen> {
               image: AssetImage(vm.getBackground()), fit: BoxFit.fill)),
       child: Scaffold(
         appBar: AppBar(
-          title: Text(LocaleKeys.islami.tr()),
+          title: Text(LocaleKeys.islami.tr(),
+                style: vm.current_theme == ThemeMode.dark
+                ? theme.textTheme.titleLarge
+                : theme.textTheme.titleLarge,),
         ),
         body: Screens[currentIndex],
         bottomNavigationBar: BottomNavigationBar(
